@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — S Islam Roni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --bg:        #0E1013;
+    --bg-alt:    #15181C;
+    --panel:     #1B1F24;
+    --line:      #2A2F35;
+    --ink:       #EDEAE2;
+    --ink-dim:   #9BA0A6;
+    --gold:      #C9A227;
+    --gold-soft: #8D7A3E;
+    --sans:  'Manrope', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,16,19,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:78px;
+  }
+  .brand{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:1.25rem;
+    letter-spacing:0.02em;
+  }
+  .brand span{ color:var(--gold); }
+  
+  .nav-links{ display:flex; gap:30px; }
+  .nav-links a{ font-size:0.9rem; color:var(--ink-dim); transition:color .2s; font-weight:500; }
+  .nav-links a:hover, .nav-links a.active{ color:var(--gold); }
+
+  .nav-cta{
+    font-size:0.9rem;
+    color:var(--gold);
+    border:1px solid var(--gold-soft);
+    padding:8px 18px;
+    border-radius:2px;
+    transition:background .25s ease, color .25s ease;
+    font-weight:600;
+  }
+  .nav-cta:hover{ background:var(--gold); color:#101215; }
+
+  .page-hero{ padding:80px 0 40px; }
+  .kicker{
+    display:flex; align-items:center; gap:12px;
+    color:var(--gold);
+    font-size:0.9rem;
+    font-weight:600;
+    letter-spacing:0.04em;
+    margin-bottom:16px;
+    text-transform:uppercase;
+  }
+  .kicker::before{
+    content:"";
+    width:34px; height:1px;
+    background:var(--gold-soft);
+  }
+  .page-hero h1{
+    font-family:var(--sans);
+    font-size:clamp(2.4rem, 4vw, 3.5rem);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    margin-bottom:16px;
+  }
+  .page-hero h1 span{ color:var(--gold); }
+  .lede{ color:var(--ink-dim); max-width:600px; font-size:1.05rem; }
+
+  /* Card Grid */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+  }
+  .card{
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    border-color:var(--gold-soft);
+  }
+  .card-thumb{
+    aspect-ratio:16/9;
+    background:var(--panel);
+    position:relative;
+    overflow:hidden;
+  }
+  .card-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .card-body{
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    flex-grow:1;
+  }
+  .card-meta{
+    font-size:0.8rem;
+    color:var(--gold);
+    margin-bottom:8px;
+    letter-spacing:0.02em;
+    font-weight:600;
+  }
+  .card-body h3{
+    font-family:var(--sans);
+    font-size:1.2rem;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  .card-body p{
+    color:var(--ink-dim);
+    font-size:0.92rem;
+    margin-bottom:20px;
+    flex-grow:1;
+  }
+  .card-foot{
+    font-size:0.88rem;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:600;
+  }
+  .card-foot .arrow{ transition:transform .2s ease; }
+  .card:hover .arrow{ transform:translateX(4px); }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    font-size:0.85rem;
+    color:var(--ink-dim);
+    margin-top:80px;
+  }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; }
+
+  @media (max-width:900px){
+    .card-grid{ grid-template-columns:repeat(2, 1fr); }
+    .nav-links{ display:none; }
+    .wrap{ padding:0 20px; }
+  }
+  @media (max-width:600px){
+    .card-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="portfolio.html">S Islam Roni<span>.blog</span></a>
+    <div class="nav-links">
+      <a href="portfolio.html#about">About</a>
+      <a href="projects.html">Work</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="tools.html">Tools</a>
+      <a href="portfolio.html#contact">Contact</a>
+    </div>
+    <a href="portfolio.html#contact" class="nav-cta">Hire Me</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero" style="border-top:none;">
+    <div class="wrap" data-aos="fade-up">
+      <h1>Notes on building <span>things.</span></h1>
+      <p class="lede">
+        Insights, engineering decisions, and lessons learned from building software applications and solving technical challenges.
+      </p>
+    </div>
+  </section>
+
+  <section style="border-top:none; padding-bottom: 80px;">
+    <div class="wrap">
+      <div class="card-grid">
+
+        <!-- Blog Card 1 -->
+       <div class="card" style="cursor: default;" data-aos="zoom-in" data-aos-delay="100">
+  <div class="card-thumb">
+    <img src="images/backend.jpg" alt="Post cover 1">
+  </div>
+  <div class="card-body">
+    <span class="card-meta">Sep 2026 · 6 min read</span>
+    <h3>How I Structured a Scalable Backend</h3>
+    <p>An in-depth breakdown of architectural decisions, caching strategies, and database structuring for high-concurrency apps.</p>
+    <!-- Blog post link temporarily disabled until page is ready -->
+    <span class="card-foot" style="color:var(--ink-dim); pointer-events: none; opacity: 0.7;">Read post <span class="arrow">→</span></span>
+  </div>
+</div>
+
+        <!-- Blog Card 2 -->
+        <div class="card" style="cursor: default;" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card-thumb">
+            <img src="images/engi.jpg" alt="Post cover 2">
+          </div>
+          <div class="card-body">
+            <span class="card-meta">Aug 2026 · 4 min read</span>
+            <h3>Lessons From My First Year as an Engineer</h3>
+            <p>Reflecting on early engineering mistakes, debugging mindsets, and core technical habits that accelerated my growth.</p>
+            <!-- Blog post link temporarily disabled until page is ready -->
+            <span class="card-foot" style="color:var(--ink-dim); pointer-events: none; opacity: 0.7;">Read post <span class="arrow">→</span></span>
+          </div>
+        </div>
+
+        <!-- Blog Card 3 -->
+        <div class="card" style="cursor: default;" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card-thumb">
+            <img src="images/tool.png" alt="Post cover 3">
+          </div>
+          <div class="card-body">
+            <span class="card-meta">Jul 2026 · 5 min read</span>
+            <h3>Choosing the Right Tool for the Job</h3>
+            <p>A practical decision-making framework for selecting tech stacks, frameworks, and tools without falling into hype traps.</p>
+            <!-- Blog post link temporarily disabled until page is ready -->
+            <span class="card-foot" style="color:var(--ink-dim); pointer-events: none; opacity: 0.7;">Read post <span class="arrow">→</span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 S Islam Roni. All rights reserved.</span>
+    <span><a href="portfolio.html">← Back to Home</a></span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 600, once: true });
+</script>
+</body>
+</html>

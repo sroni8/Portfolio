@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project case - S islam Roni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .cs-meta-row{
+    display:flex; flex-wrap:wrap; gap:36px;
+    margin-top:36px; padding-top:28px; border-top:1px solid var(--line);
+  }
+  .cs-meta-row div label{ display:block; font-size:0.76rem; color:var(--gold-soft); letter-spacing:0.03em; margin-bottom:6px; }
+  .cs-meta-row div p{ font-size:0.94rem; color:var(--ink); }
+
+  .cs-hero-img{ aspect-ratio:16/9; margin-top:56px; }
+
+  .cs-body{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:64px; }
+  .cs-side{ position:sticky; top:100px; align-self:start; }
+  .cs-side h4{ font-family:var(--serif); font-size:1rem; font-weight:600; margin-bottom:14px; }
+  .cs-side .tag-row{ margin-bottom:32px; }
+
+  .cs-content h2{ font-family:var(--serif); font-weight:600; font-size:1.5rem; margin:36px 0 16px; }
+  .cs-content h2:first-child{ margin-top:0; }
+  .cs-content p{ color:var(--ink-dim); font-size:1rem; margin-bottom:16px; max-width:640px; }
+  .cs-content ul{ margin-bottom:16px; }
+  .cs-content li{ color:var(--ink-dim); font-size:0.96rem; padding:6px 0 6px 20px; position:relative; }
+  .cs-content li::before{ content:"›"; position:absolute; left:0; color:var(--gold-soft); }
+
+  .cs-gallery{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px; }
+  .cs-gallery .ph-box{ aspect-ratio:4/3; }
+
+  .cs-results{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); margin-top:20px;
+  }
+  .cs-results div{ background:var(--bg); padding:26px 22px; }
+  .cs-results strong{ display:block; font-family:var(--serif); font-size:1.6rem; color:var(--gold); }
+  .cs-results span{ font-size:0.82rem; color:var(--ink-dim); }
+
+  .cs-nav{
+    display:flex; justify-content:space-between; padding:40px 0;
+    border-top:1px solid var(--line);
+  }
+  .cs-nav a{ font-size:0.92rem; color:var(--ink-dim); transition:color .25s ease; }
+  .cs-nav a:hover{ color:var(--gold); }
+
+  @media (max-width:860px){
+    .cs-body{ grid-template-columns:1fr; }
+    .cs-side{ position:static; }
+    .cs-gallery{ grid-template-columns:1fr; }
+    .cs-results{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="portfolio.html">S islam Roni<span></span></a>
+    <div class="nav-links">
+      <a href="portfolio.html#about">About</a>
+      <a href="projects.html" class="active">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="tools.html">Tools</a>
+      <a href="portfolio.html#contact">Contact</a>
+    </div>
+    <a href="portfolio.html#contact" class="nav-cta">Hire Me</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero" style="border-top:none;">
+    <div class="wrap">
+      <a href="projects.html" style="font-size:0.86rem; color:var(--ink-dim);">← All Projects</a>
+      <div class="kicker" style="margin-top:22px;">CASE STUDY</div>
+      <!-- PROJECT TITLE: change this -->
+      <h1>Project <em>Title One</em></h1>
+      <p class="lede">
+        প্রজেক্টের এক-দুই লাইনের সংক্ষিপ্ত পরিচয় এখানে লিখুন — এটা কী,
+        কার জন্য বানানো হয়েছে, এবং মূল উদ্দেশ্য কী ছিল।
+      </p>
+
+      <div class="cs-meta-row">
+        <div><label>ROLE</label><p>Full-Stack Developer</p></div>
+        <div><label>TIMELINE</label><p>Jan 2025 — Apr 2025</p></div>
+        <div><label>CLIENT / TYPE</label><p>Personal / Freelance / Company</p></div>
+        <div><label>LIVE LINK</label><p><a href="#" style="color:var(--gold);">View Live Project →</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="ph-box cs-hero-img">
+      <img src="images/e-com.webp" alt="Project hero image">
+      <div class="ph-inner"><div class="icon">＋</div>images/e-com.webp<small>16:9 ratio</small></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap cs-body">
+      <div class="cs-side">
+        <h4>Tech Stack</h4>
+        <div class="tag-row">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">AWS</span>
+        </div>
+        <h4>Key Results</h4>
+        <div class="cs-results" style="grid-template-columns:1fr;">
+          <div><strong>40%</strong><span>Faster load time</span></div>
+          <div><strong>10K+</strong><span>Active users</span></div>
+          <div><strong>99.9%</strong><span>Uptime</span></div>
+        </div>
+      </div>
+
+      <div class="cs-content">
+        <h2>The Problem</h2>
+        <p>
+          এখানে লিখুন কী সমস্যা বা চ্যালেঞ্জ নিয়ে কাজ শুরু হয়েছিল। এটা যত স্পষ্টভাবে
+          লিখবেন, রিক্রুটার তত সহজে বুঝবে আপনি সমস্যা কীভাবে বিশ্লেষণ করেন।
+        </p>
+
+        <h2>The Approach</h2>
+        <p>
+          সমাধানের দিকে আপনার চিন্তার প্রক্রিয়া, সিদ্ধান্ত এবং কেন সেই পথ বেছে নিয়েছিলেন তা লিখুন।
+        </p>
+        <ul>
+          <li>প্রথমে যা রিসার্চ/প্ল্যানিং করা হয়েছিল</li>
+          <li>মূল টেকনিক্যাল সিদ্ধান্ত ও কারণ</li>
+          <li>টিমের সাথে কীভাবে কাজ ভাগ করা হয়েছিল</li>
+        </ul>
+
+        <h2>What I Built</h2>
+        <p>
+          মূল ফিচার ও ফাংশনালিটি বর্ণনা করুন — কী কী তৈরি করেছেন তার তালিকা দিন।
+        </p>
+        <div class="cs-gallery">
+          <div class="ph-box"><img src="" alt="Screenshot 1"><div class="ph-inner"><div class="icon">＋</div>স্ক্রিনশট ১</div></div>
+          <div class="ph-box"><img src="" alt="Screenshot 2"><div class="ph-inner"><div class="icon">＋</div>স্ক্রিনশট ২</div></div>
+        </div>
+
+        <h2>The Result</h2>
+        <p>
+          প্রজেক্টের প্রভাব/ফলাফল লিখুন — সংখ্যা দিয়ে বললে সবচেয়ে শক্তিশালী হয় (যেমন ইউজার গ্রোথ, পারফরম্যান্স উন্নতি, রেভিনিউ প্রভাব)।
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="cs-nav">
+      <a href="project-case-study.html">← Previous Project</a>
+      <a href="projects.html">All Projects</a>
+      <a href="project-case-study.html">Next Project →</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 S islam Roni. All rights reserved.</span>
+    <span><a href="portfolio.html">← Back to Home</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

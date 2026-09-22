@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S islam Roni — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:        #0E1013;
+    --bg-alt:    #15181C;
+    --panel:     #1B1F24;
+    --line:      #2A2F35;
+    --ink:       #EDEAE2;
+    --ink-dim:   #9BA0A6;
+    --gold:      #C9A227;
+    --gold-soft: #8D7A3E;
+    --serif: 'Fraunces', serif;
+    --sans:  'Manrope', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,16,19,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:78px;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.25rem;
+    letter-spacing:0.02em;
+  }
+  .brand span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:36px; }
+  .nav-links a{
+    font-size:0.92rem;
+    color:var(--ink-dim);
+    transition:color .25s ease;
+  }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    border:1px solid var(--gold-soft);
+    padding:9px 20px;
+    border-radius:2px;
+    font-size:0.88rem;
+    color:var(--gold);
+    transition:background .25s ease, color .25s ease;
+  }
+  .nav-cta:hover{ background:var(--gold); color:#101215; }
+  .menu-btn{ display:none; background:none; border:0; color:var(--ink); font-size:1.6rem; cursor:pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:100px 0 120px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(560px 380px at 82% 10%, rgba(201,162,39,0.10), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+    align-items:center;
+  }
+  .kicker{
+    display:flex; align-items:center; gap:12px;
+    color:var(--gold);
+    font-size:0.9rem;
+    letter-spacing:0.04em;
+    margin-bottom:28px;
+  }
+  .kicker::before{
+    content:"";
+    width:34px; height:1px;
+    background:var(--gold-soft);
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(2.6rem, 5.2vw, 4.2rem);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold);
+  }
+  .hero p.lede{
+    margin-top:26px;
+    max-width:520px;
+    color:var(--ink-dim);
+    font-size:1.08rem;
+  }
+  .hero-actions{
+    margin-top:40px;
+    display:flex; gap:18px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:#111316;
+    padding:14px 30px;
+    font-weight:700;
+    font-size:0.92rem;
+    border-radius:2px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 26px -14px rgba(201,162,39,0.55); }
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:14px 30px;
+    font-size:0.92rem;
+    border-radius:2px;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .btn-ghost:hover{ border-color:var(--gold-soft); background:var(--panel); }
+
+  .hero-stats{
+    display:flex; gap:36px;
+    margin-top:56px;
+  }
+  .hero-stats div strong{
+    display:block;
+    font-family:var(--serif);
+    font-size:1.7rem;
+    color:var(--ink);
+  }
+  .hero-stats div span{
+    font-size:0.82rem;
+    color:var(--ink-dim);
+  }
+
+  /* hero photo frame */
+  .hero-photo {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .hero-photo img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5;
+    object-fit: cover !important;
+    object-position: center top !important;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+  }
+
+  .photo-placeholder{
+    text-align:center;
+    color:var(--ink-dim);
+    padding:24px;
+  }
+  .photo-placeholder .icon{
+    width:52px; height:52px;
+    margin:0 auto 14px;
+    border:1px solid var(--gold-soft);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+    font-size:1.3rem;
+  }
+  .photo-placeholder small{
+    display:block;
+    margin-top:6px;
+    font-size:0.76rem;
+    color:#6C7178;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{ padding:100px 0; border-top:1px solid var(--line); }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:56px; 
+  }
+  .section-head h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(1.9rem, 3.4vw, 2.6rem);
+  }
+  .section-num{
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--gold-soft);
+    font-size:1rem;
+    display: none;
+  }
+  .section-head p{ color:var(--ink-dim); max-width:360px; font-size:0.96rem; }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-photo{
+    aspect-ratio:3/4;
+    border:1px solid var(--line);
+    background:var(--bg-alt);
+    position:relative;
+    overflow:hidden;
+  }
+  .about-photo img{
+    width:100%; height:100%; object-fit:cover;
+    display:block;
+  }
+  .about-text p{ color:var(--ink-dim); margin-bottom:18px; font-size:1.02rem; }
+  .about-text p:first-child{
+    color:var(--ink);
+    font-size:1.14rem;
+  }
+  .facts{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 40px;
+  }
+  .facts div{
+    border-top:1px solid var(--line);
+    padding-top:12px;
+  }
+  .facts div label{
+    display:block;
+    font-size:0.76rem;
+    color:var(--gold-soft);
+    letter-spacing:0.03em;
+    margin-bottom:4px;
+  }
+  .facts div p{ margin:0; color:var(--ink); font-size:0.96rem; }
+
+  /* ---------- Work gallery ---------- */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+    background:transparent;
+  }
+  .work-item{
+    display:block;
+    background:#fff;
+    border-radius: 12px;
+    overflow:hidden;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .work-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+
+  /* ---------- Video resume ---------- */
+  .video-wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .video-frame{
+    aspect-ratio:16/9;
+    background:var(--panel);
+    border:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .video-frame video{ width:100%; height:100%; object-fit:cover; display:none; }
+  .play-btn{
+    width:74px; height:74px;
+    border-radius:50%;
+    border:1px solid var(--gold-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+    font-size:1.4rem;
+    margin:0 auto 16px;
+  }
+  .video-copy h3{
+    font-family:var(--serif);
+    font-size:1.6rem;
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .video-copy p{ color:var(--ink-dim); margin-bottom:24px; }
+  .video-copy ul{ list-style:none; }
+  .video-copy li{
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    color:var(--ink-dim);
+    font-size:0.92rem;
+    display:flex; gap:10px;
+  }
+  .video-copy li::before{ content:"—"; color:var(--gold-soft); }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+  }
+  .contact-grid h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(2rem, 4vw, 3rem);
+    line-height:1.15;
+  }
+  .contact-list{ margin-top:40px; }
+  .contact-list a{
+    display:block;
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    font-size:1.02rem;
+    display:flex; justify-content:space-between; align-items:center;
+    transition:color .25s ease;
+  }
+  .contact-list a:last-child{ border-bottom:1px solid var(--line); }
+  .contact-list a:hover{ color:var(--gold); }
+  .contact-list a span{ color:var(--ink-dim); font-size:0.86rem; }
+
+  .contact-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:40px;
+  }
+  .contact-card label{
+    display:block;
+    font-size:0.76rem;
+    color:var(--gold-soft);
+    letter-spacing:0.03em;
+    margin-bottom:14px;
+  }
+  .contact-card p{ color:var(--ink-dim); font-size:0.94rem; margin-bottom:10px; }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.82rem; color:var(--ink-dim);
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--line);
+  }
+  .skill-block{
+    display:block;
+    background:var(--bg);
+    padding:36px 40px;
+    transition:background .25s ease;
+  }
+  a.skill-block:hover{ background:var(--panel); }
+  .skill-block h4{
+    font-family:var(--serif);
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .skill-block .sub{
+    color:var(--ink-dim);
+    font-size:0.86rem;
+    margin-bottom:22px;
+  }
+  .tag-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .tag{
+    border:1px solid var(--line);
+    padding:8px 16px;
+    font-size:0.86rem;
+    color:var(--ink);
+    border-radius:2px;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .tag:hover{ border-color:var(--gold-soft); color:var(--gold); }
+
+  /* ---------- Research interests ---------- */
+  .research-list{
+    display:flex; flex-direction:column;
+  }
+  .research-item{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:28px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .research-item:last-child{ border-bottom:1px solid var(--line); }
+  .research-item .r-tag{
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--gold-soft);
+    font-size:0.98rem;
+    padding-top:2px;
+  }
+  .research-item h4{
+    font-family:var(--serif);
+    font-size:1.16rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .research-item p{ color:var(--ink-dim); font-size:0.95rem; max-width:640px; }
+
+  /* ---------- Future / currently exploring ---------- */
+  .future-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+  }
+  .future-item{
+    background:var(--bg);
+    padding:34px 30px;
+    border-left:2px solid transparent;
+    transition:border-color .25s ease;
+  }
+  .future-item:hover{ border-left:2px solid var(--gold); }
+  .future-item .f-status{
+    font-size:0.76rem;
+    color:var(--gold);
+    letter-spacing:0.02em;
+    margin-bottom:14px;
+    display:block;
+  }
+  .future-item h4{
+    font-family:var(--serif);
+    font-size:1.08rem;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .future-item p{ color:var(--ink-dim); font-size:0.9rem; }
+
+  /* ---------- Travel teaser ---------- */
+  .travel-wrap{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .travel-copy p{ color:var(--ink-dim); font-size:1rem; margin-bottom:28px; max-width:440px; }
+  .travel-fan{
+    position:relative;
+    height:230px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .fan-card{
+    position:absolute;
+    width:150px; height:190px;
+    border:1px solid var(--line);
+    background:var(--bg-alt);
+    border-radius:3px;
+    overflow:hidden;
+    box-shadow:0 18px 34px -18px rgba(0,0,0,0.6);
+    transition:transform .35s ease;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .fan-card img{ width:100%; height:100%; object-fit:cover; display:none; }
+  .fan-card .ph{ text-align:center; color:var(--ink-dim); padding:12px; font-size:0.78rem; }
+  .fan-card .ph .icon{
+    width:32px; height:32px; margin:0 auto 8px;
+    border:1px solid var(--gold-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold); font-size:0.95rem;
+  }
+  .fan-card:nth-child(1){ transform:rotate(-10deg) translateX(-70px); z-index:1; }
+  .fan-card:nth-child(2){ transform:rotate(-2deg) translateX(-20px); z-index:2; }
+  .fan-card:nth-child(3){ transform:rotate(6deg) translateX(30px); z-index:3; }
+  .fan-card:nth-child(4){ transform:rotate(13deg) translateX(78px); z-index:4; }
+  .travel-fan:hover .fan-card:nth-child(1){ transform:rotate(-13deg) translateX(-88px) translateY(-4px); }
+  .travel-fan:hover .fan-card:nth-child(2){ transform:rotate(-4deg) translateX(-28px) translateY(-8px); }
+  .travel-fan:hover .fan-card:nth-child(3){ transform:rotate(7deg) translateX(38px) translateY(-8px); }
+  .travel-fan:hover .fan-card:nth-child(4){ transform:rotate(16deg) translateX(96px) translateY(-4px); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .wrap{ padding:0 22px; }
+    .nav-links{ display:none; }
+    .menu-btn{ display:block; }
+    .hero{ padding:64px 0 72px; }
+    .hero-grid{ grid-template-columns:1fr; gap:44px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .about-photo{ max-width:320px; }
+    .work-grid{ grid-template-columns:repeat(2,1fr); }
+    .video-wrap{ grid-template-columns:1fr; }
+    .contact-grid{ grid-template-columns:1fr; }
+    section{ padding:72px 0; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .future-grid{ grid-template-columns:1fr; }
+    .research-item{ grid-template-columns:1fr; gap:6px; }
+    .timeline{ padding-left:26px; }
+    .t-item::before{ left:-26px; }
+    .travel-wrap{ grid-template-columns:1fr; }
+    .travel-fan{ margin-top:20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">S islam Roni<span></span></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="#research">Research</a>
+      <a href="tools.html">Tools</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" style="border-top:none; padding-top:70px;padding-bottom: 80px; " data-aos="fade-up">
+    <div class="wrap hero-grid">
+      <div data-aos="fade-right">
+        <div>Welcome to my Portfolio :)</div><br>
+        <h1>Full-Stack Creator <br>Tech Entrepreneur Traveller<br><em></em></h1>
+        <p class="lede">
+          Building innovative software and finding creative inspiration across Bangladesh and beyond.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn-primary">View My Work</a>
+          <a href="#" class="btn-ghost">Download Resume (PDF)</a>
+        </div>
+        <!-- Hero Stats & Social Links -->
+        <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 24px;">
+          
+          <!-- Stats Counter Row -->
+          <div class="hero-stats" style="display: flex; gap: 50px; flex-wrap: wrap;">
+            <div><strong>03+</strong><span>Years Experience</span></div>
+            <div><strong>15+</strong><span>Projects Shipped</span></div>
+            <div><strong>05+</strong><span>Teams Collaborated</span></div>
+          </div>
+
+          <!-- Social Links Row -->
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <span style="font-size: 0.82rem; color: var(soft); letter-spacing: 0.04em; font-weight: 600; text-transform: uppercase; margin-right: 4px;"<b><h2>Connect:</b></h2></span>
+            
+            <!-- Facebook -->
+            <a href="https://facebook.com/sakibronii" target="_blank" style="background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--gold)'; this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--line)'; this.style.color='var(--ink)';">
+              Facebook
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" style="background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--gold)'; this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--line)'; this.style.color='var(--ink)';">
+              Instagram
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/sroni8" target="_blank" style="background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--gold)'; this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--line)'; this.style.color='var(--ink)';">
+              GitHub
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="hero-photo" data-aos="fade-left" data-aos-delay="200">
+        <img src="images/pp1(1).jpeg" alt="Sakibul islam Roni">
+        <div class="photo-placeholder"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" style="padding-top: 50px; data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head">
+        <div data-aos="fade-right">
+          <span class="section-num">01</span>
+          <h2>About Me</h2>
+        </div>
+        <p data-aos="fade-left">Blending code, AI, and creativity to build impactful web applications, while finding fresh perspectives through real-world explorations.</p>
+      </div>
+      
+      <div class="about-grid">
+        <div class="about-photo" data-aos="fade-right" data-aos-delay="100">
+          <img src="images/others.jpeg" alt="Sakibul islam Roni">
+          <div class="photo-placeholder">
+            <div class="icon">＋</div>
+            <small>S islam Roni 3:4</small>
+          </div>
+        </div>
+
+        <div class="about-text" data-aos="fade-left" data-aos-delay="200">
+          <p>
+              My primary goal is to leverage modern web technologies to transform complex problems into simple, effective, and elegant solutions.
+          </p>
+          <p>
+              My daily work revolves around building custom web applications, integrating AI into projects, and developing AI-driven digital media solutions. 
+          </p>
+          <p>
+              From system architecture design to user requirement analysis, I prioritize data-driven decisions at every stage of development. I truly believe that great software goes beyond just looking great—it actively makes the user's workflow much easier.
+          </p>
+
+          <div class="facts" data-aos="zoom-in" data-aos-delay="300">
+            <div><label>ROLE</label><p>Founder & Software Engineer</p></div>
+            <div><label>LOCATION</label><p>Dhaka, Bangladesh</p></div>
+            <div><label>EXPERIENCE</label><p>3+ Years</p></div>
+            <div><label>SPECIALTY</label><p>Full-Stack Web & AI Solutions</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills" style="padding-top: 50px; style="padding-bottom: 30px; data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head">
+        <div data-aos="fade-right">
+          <span class="section-num">02</span>
+          <h2>Skills &amp; Toolkit</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="skill-block" data-aos="zoom-in" data-aos-delay="100">
+        <h4>Languages</h4>
+        <div class="sub">Core programming languages I work with</div>
+        <div class="tag-row">
+          <span class="tag">HTML5</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">c</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-block" data-aos="zoom-in" data-aos-delay="200">
+        <h4>Frameworks &amp; Libraries</h4>
+        <div class="sub">Tools I build products with</div>
+        <div class="tag-row">
+          <span class="tag">Bootstrap</span>
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">Django</span>
+          <span class="tag">FirstAPI</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">TailwindCSS</span>
+        </div>
+      </div>
+      <div class="skill-block" data-aos="zoom-in" data-aos-delay="300">
+        <h4>Infrastructure &amp; Tools</h4>
+        <div class="sub">Deployment, data, and workflow tools</div>
+        <div class="tag-row">
+          <span class="tag">Git &amp; GitHub</span>
+          <span class="tag">Docker</span>
+          <span class="tag">UML Design Tools</span>
+          <span class="tag">Ai Media Platfrom</span>
+          <span class="tag">Vs Code</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-block" data-aos="zoom-in" data-aos-delay="400">
+        <h4>Professional Skills</h4>
+        <div class="sub">How I work with teams and stakeholders</div>
+        <div class="tag-row">
+          <span class="tag">System Architech Design</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">Technical Writing</span>
+          <span class="tag">Mentoring</span>
+          <span class="tag">Project Management</span>
+          <span class="tag">Event Management</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Logistics & Planning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom: 50px; padding-top: 20px;" data-aos="fade-right">
+        <div>
+          <span class="section-num">03</span>
+          <h2>Experience</h2>
+        </div>
+        <p style="margin-top:16px;" data-aos="fade-left">Building scalable software, managing enterprise solutions, and leading technical teams to deliver real-world impact.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="100">
+          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2026 — Present</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Founder & Software Engineer</h3>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">ForceTech49, Dhaka</p>
+          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Leading end-to-end software development, custom ERP solutions, and AI-driven web applications.</p>
+          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+            <li>Architecting system designs and managing full-stack product lifecycles from concept to deployment.</li>
+            <li>Overseeing technical strategies and delivering scalable solutions for diverse business needs.</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="200">
+          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2025 — Present</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Owner & CEO & Model</h3>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">The Reveal (Online Fashion Company), Dhaka</p>
+          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Directing overall business strategy, brand growth, and digital operations for an e-commerce fashion platform.</p>
+          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+            <li>Managing customer acquisition, digital marketing campaigns, and brand positioning in the online market.</li>
+            <li>Integrating modern e-commerce tools and workflow automation to streamline daily business processes.</li>
+          </ul>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px; grid-column: span 2;" data-aos="fade-up" data-aos-delay="300">
+          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2023 — 2024</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Junior Developer / Intern</h3>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">People N Tech, Dhaka</p>
+          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Gained hands-on experience in modern web design and front-end development practices.</p>
+          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+            <li>Collaborated on building responsive web interfaces and improving UI/UX performance.</li>
+            <li>Applied core programming concepts to develop functional web components under senior supervision.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom: 60px; text-align: center; display: block;" data-aos="fade-down">
+        <span class="section-num">04</span>
+        <h2 style="font-size: 38px; color: #fff; letter-spacing: 1px;">Education & Credentials</h2>
+        <p style="margin-top:12px; color: #888;">Academic background, foundational studies, and professional training certificates.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+        <div style="width: 58%; align-self: flex-start; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-left: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-right">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h3 style="font-size: 20px; color: #fff; margin: 0;">B.Sc. in Computer Science & Engineering</h3>
+            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2024 — 2028</span>
+          </div>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Daffodil International University, Dhaka</p>
+          <p style="color: #aaa; font-size: 14px; margin-bottom: 10px;">CGPA: Coming Soon</p>
+          <ul style="color: #999; font-size: 13.5px; padding-left: 18px; line-height: 1.6; margin: 0;">
+            <li>Focused on core computer science concepts, advanced algorithms, and full-stack software development.</li>
+            <li>Actively engaged in technical research and practical software implementations, bridging academic theories with real-world solutions.</li>
+          </ul>
+        </div>
+
+        <div style="width: 58%; align-self: flex-end; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-right: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-left">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h3 style="font-size: 20px; color: #fff; margin: 0;">Diploma in Engineering</h3>
+            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2019 — 2023</span>
+          </div>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Barishal Polytechnic Institute, Barishal</p>
+          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin: 0;">CGPA: 3.88/4.00 — Focused on foundational engineering, technical problem-solving, and practical applications.</p>
+        </div>
+
+        <div style="width: 58%; align-self: flex-start; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-left: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-right">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+            <h3 style="font-size: 20px; color: #fff; margin: 0;">Flutter UI/UX Design Professional Training</h3>
+            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2022 — 2023</span>
+          </div>
+          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Sheikh Russel Mobile Games & Apps Development</p>
+          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin: 0;">Mobile Games & App Development - ICT Division Project</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK GALLERY ================= -->
+  <section id="work" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" data-aos="fade-right">
+        <div>
+          <span class="section-num">05</span>
+          <h2>Recent Works</h2>
+        </div>
+        <p data-aos="fade-left">A collection of scalable software products, full-stack projects, and innovative digital platforms.</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="work-grid">
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="100" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/e-com.jpg" alt="E-Commerce Project" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">Custom E-Commerce Platform</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">An end-to-end e-commerce web application built for seamless shopping experience and inventory management.</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="200" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/erp-m.png" alt="ERP System For Manufacturing" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">ERP System For Manufacturing</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Tailored ERP for mosquito coil plants to automate batch processing, inventory, and supply chain</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="300" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/hostel.png" alt="Hostel Management System" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">Hostel Management System</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Digital system for automated room allocation, entry/exit logs, meal tracking, and resident facility management.</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="100" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/uiux.jpg" alt="UI/UX Design" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">UI/UX Design Using Flutter</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Custom mobile application interfaces built with Flutter, focusing on smooth performance user journeys.</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="200" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/gameapp.jpg" alt="Game app development" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">Game App development</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Engaging mobile game development focused on smooth mechanics, interactive UI, and immersive player experiences.</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="300" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/ai.png" alt="Real-Time Customer Sentiment & Churn Predictor" style="width: 100%; height: 220px; object-fit: cover; background: #0f1418; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">Real-Time Customer Sentiment & Churn Predictor</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">End-to-end Python pipeline using Scikit-Learn and Pandas to predict customer churn and analyze product feedback trends.</p>
+          </div>
+        </a>
+
+        <a class="work-item" href="project-case-study.html" data-aos="zoom-in" data-aos-delay="400" style="background: #fff; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; color: #333;">
+          <img src="images/erp.jpg" alt="Project" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+          <div style="padding: 24px;">
+              <h4 style="font-size: 18px; font-weight: bold; color: #111; margin: 0 0 10px 0; text-transform: uppercase;">Mosquito Coil Manufacturing ERP</h4>
+              <p style="font-size: 14px; color: #666; line-height: 1.5; margin: 0;">Tailored ERP for mosquito coil plants to automate batch processing, inventory, and supply chain.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="wrap" style="margin-top:36px; text-align:center;">
+      <a href="projects.html" class="btn-ghost">View All Projects →</a>
+    </div>
+  </section>
+
+  <!-- ================= LATEST WRITING ================= -->
+  <section id="writing" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" style="display: block;" data-aos="fade-right">
+        <div>
+          <span class="section-num">06</span>
+          <h2>Latest Writing</h2>
+        </div>
+        <p style="max-width: 100%; margin-top: 12px;" data-aos="fade-left">Sharing insights, engineering lessons, and technical documentation from building real-world software products.</p>
+      </div>
+
+      <div class="skills-grid" style="grid-template-columns:repeat(3,1fr);" data-aos="fade-up" data-aos-delay="100">
+        <a class="skill-block" href="blog-post.html" data-aos="fade-up" data-aos-delay="100" style="text-decoration:none; transition:border-color .25s ease;">
+          <span style="font-size:0.78rem; color:var(--gold);">Sep 2026 · 6 min read</span>
+          <h4 style="margin-top:10px;">How I Structured a Scalable Backend</h4>
+          <div class="sub" style="margin-bottom:0;">Detailed architectural design choices implemented in recent enterprise projects.</div>
+        </a>
+        <a class="skill-block" href="blog-post.html" data-aos="fade-up" data-aos-delay="200" style="text-decoration:none;">
+          <span style="font-size:0.78rem; color:var(--gold);">Aug 2026 · 4 min read</span>
+          <h4 style="margin-top:10px;">Lessons From My First Year as an Engineer</h4>
+          <div class="sub" style="margin-bottom:0;">Core takeaways and early career mistakes transformed into productivity boosters.</div>
+        </a>
+        <a class="skill-block" href="blog-post.html" data-aos="fade-up" data-aos-delay="300" style="text-decoration:none;">
+          <span style="font-size:0.78rem; color:var(--gold);">Jul 2026 · 5 min read</span>
+          <h4 style="margin-top:10px;">Choosing the Right Tool for the Job</h4>
+          <div class="sub" style="margin-bottom:0;">A pragmatic framework for evaluating frameworks and selecting optimal technology stacks.</div>
+        </a>
+      </div>
+
+      <div class="wrap" style="margin-top:36px; text-align:center; padding:0;">
+        <a href="blog.html" class="btn-ghost">Read All Posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORCECORP SOFTWARE SOLUTIONS (Featured Enterprise Showcase) ================= -->
+  <section id="forcecorp" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" style="display: block;" data-aos="fade-right">
+        <div>
+          <span class="section-num">07</span>
+          <h2>ForceTech49 Solutions</h2>
+        </div>
+        <p style="max-width: 100%; margin-top: 12px;" data-aos="fade-left">Enterprise-grade software engineering solutions and automated platforms engineered by ForceTech49.</p>
+      </div>
+
+      <div class="future-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="future-item" data-aos="fade-up" data-aos-delay="100">
+          <span class="f-status">ENTERPRISE SUITE</span>
+          <h4>AI-Powered ERP Ecosystem</h4>
+          <p>Custom resource planning suite featuring automated batch tracking, predictive analytics, and real-time inventory synchronization.</p>
+        </div>
+        <div class="future-item" data-aos="fade-up" data-aos-delay="200">
+          <span class="f-status">DEVELOPER TOOLS</span>
+          <h4>Smart Business Automation CLI</h4>
+          <p>Advanced command-line utility engineered to accelerate deployment workflows and automate complex multi-stage release pipelines.</p>
+        </div>
+        <div class="future-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="f-status">MACHINE LEARNING</span>
+          <h4>Predictive Churn Engine</h4>
+          <p>High-performance data intelligence pipeline evaluating consumer behavior vectors and delivering real-time retention insights.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPEN SOURCE TOOLS ================= 
+  <section id="oss" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" data-aos="fade-right">
+        <div>
+          <span class="section-num">08</span>
+          <h2>Open Source Tools</h2>
+        </div>
+        <p data-aos="fade-left">Utilities developed to resolve engineering friction and shared with the developer community.</p>
+      </div>
+
+      <div class="future-grid" data-aos="fade-up" data-aos-delay="100">
+        <div class="future-item" data-aos="fade-up" data-aos-delay="100">
+          <span class="f-status">⚙ CLI TOOL</span>
+          <h4>CLI Deploy Helper</h4>
+          <p>Lightweight command-line script designed to streamline static site deployments.</p>
+        </div>
+        <div class="future-item" data-aos="fade-up" data-aos-delay="200">
+          <span class="f-status">◆ REACT LIBRARY</span>
+          <h4>React Form Validator</h4>
+          <p>High-performance modular form validation library built for modern React interfaces.</p>
+        </div>
+        <div class="future-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="f-status">▤ BOILERPLATE</span>
+          <h4>Starter Boilerplate Kit</h4>
+          <p>Production-ready template structured with Node.js, Express, and PostgreSQL.</p>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:36px; text-align:center; padding:0;">
+        <a href="tools.html" class="btn-ghost">See All Tools →</a>
+      </div>
+    </div>
+  </section>              -->
+
+  <!-- ================= RESEARCH INTERESTS ================= -->
+  <section id="research" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" data-aos="fade-right">
+        <div>
+          <span class="section-num">09</span>
+          <h2>Research Interests</h2>
+        </div>
+        <p data-aos="fade-left">Advanced technical domains and academic focus areas driving continuous experimentation and innovation.</p>
+      </div>
+
+      <div class="research-list" data-aos="fade-up" data-aos-delay="100">
+        <div class="research-item" data-aos="fade-up" data-aos-delay="100">
+          <span class="r-tag">01</span>
+          <div>
+            <h4>Cybersecurity & Threat Intelligence</h4>
+            <p>Securing modern web applications, protecting digital assets, and implementing robust threat mitigation protocols.</p>
+          </div>
+        </div>
+        <div class="research-item" data-aos="fade-up" data-aos-delay="200">
+          <span class="r-tag">02</span>
+          <div>
+            <h4>AI in Technology & Medical Sector</h4>
+            <p>Integrating artificial intelligence algorithms to optimize health-tech diagnostics, medical workflows, and technological systems.</p>
+          </div>
+        </div>
+        <div class="research-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="r-tag">03</span>
+          <div>
+            <h4>AI in Automotive & Smart Vehicles</h4>
+            <p>Exploring smart vehicle automation, intelligent dashboard integration, and modern vehicular technology solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FUTURE WORK ================= -->
+  <section id="future" data-aos="fade-up">
+    <div class="wrap">
+      <div class="section-head" data-aos="fade-right">
+        <div>
+          <span class="section-num">10</span>
+          <h2>What's Next</h2>
+        </div>
+        <p data-aos="fade-left">Strategic long-term engineering objectives, analytical business solutions, and leadership milestones.</p>
+      </div>
+    </div>
+
+    <div class="future-grid" data-aos="fade-up" data-aos-delay="100">
+      <div class="future-item" data-aos="fade-up" data-aos-delay="100">
+        <span class="f-status">CURRENTLY EXPLORING</span>
+        <h4>Advanced Development & Automation</h4>
+        <p>Building diverse development solutions designed to simplify complex workflows and streamline everyday operational processes.</p>
+      </div>
+      <div class="future-item" data-aos="fade-up" data-aos-delay="200">
+        <span class="f-status">BUSINESS ANALYTICS</span>
+        <h4>Marketing Analytics & Growth Insights</h4>
+        <p>Deriving data-driven analytical solutions and strategic insights to optimize marketing performance for any company.</p>
+      </div>
+      <div class="future-item" data-aos="fade-up" data-aos-delay="300">
+        <span class="f-status">LEADERSHIP VISION</span>
+        <h4>Tech Leadership & Team Guidance</h4>
+        <p>Stepping into technical leadership roles to guide, mentor, and empower high-performing product development teams.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ================= TRAVEL ================= -->
+  <section id="travel" data-aos="fade-up">
+    <div class="wrap travel-wrap">
+      <div class="travel-copy" data-aos="fade-right">
+        <span class="section-num">11</span>
+        <h2 style="font-family:var(--serif); font-weight:600; font-size:clamp(1.9rem, 3.4vw, 2.6rem); margin:12px 0 20px;">Beyond Work</h2>
+        <p>
+          Traveling is my ultimate passion and a great way to refresh my mind. Whenever time permits, exploring new destinations brings mental clarity, fresh inspiration, and a balanced, professional approach to my daily engineering work.
+        </p>
+        <a href="travel-gallery.html" target="_blank" class="btn-ghost">See Full Travel Album →</a>
+      </div>
+
+      <div class="travel-fan" data-aos="fade-left" data-aos-delay="200">
+        <div class="fan-card"><img src="images/pic1.jpeg" alt="Sakibul Islam Roni" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div class="fan-card"><img src="images/pic2.jpeg" alt="Sakibul Islam Roni" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div class="fan-card"><img src="images/pic3.jpeg" alt="Sakibul Islam Roni" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+        <div class="fan-card"><img src="images/pic4.jpeg" alt="Sakibul Islam Roni" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      </div>
+    </div>
+  </section>
+  <!-- ================= VIDEO RESUME ================= -->
+  <section id="video" data-aos="fade-up">
+    <div class="wrap video-wrap">
+      <div class="video-frame" data-aos="fade-right" style="position: relative; width: 100%; aspect-ratio: 16/9; background: var(--panel); border-radius: 8px; overflow: hidden; border: 1px solid var(--line);">
+        <iframe src="https://www.youtube.com/embed/O0O6cKyIz_A" title="Video Resume" style="width:100%; height:100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <div class="video-copy" data-aos="fade-left" data-aos-delay="200">
+        <span class="section-num">12</span>
+        <h3>Video Resume</h3>
+        <p>
+          Discover in 90 seconds who I am, what I build, and why partnering with me drives real-world impact. Upload your recorded video resume or stream here.
+        </p>
+        <ul>
+          <li>Professional Background: Full-Stack Developer & Founder of ForceTech49 with 3+ years of experience.</li>
+          <li>Core Focus: AI research, data analysis, secure coding practices, and robust software engineering.</li>
+          <li>Collaboration: Ready for enterprise solutions, technical leadership, and innovative digital projects.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+ <section id="contact" data-aos="fade-up">
+    <div class="wrap" style="max-width: 1180px; margin: 0 auto;">
+      
+      <!-- Section Header / Title -->
+      <div style="margin-bottom: 40px;" data-aos="fade-right">
+        <span class="section-num">13</span>
+        <h2 style="font-family: var(--serif); font-weight: 600; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15;">Let's work<br>together.</h2>
+      </div>
+
+      <!-- Main Layout: Left Links & Right Form Stacked -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-bottom: 25px;">
+        
+        <!-- Left Column: Contact Links -->
+        <div class="contact-list" data-aos="fade-right">
+          <a href="mailto:sakibulislamroi1815@gmail.com">Email <span>sakibulislamroni1815@gmail.com</span></a>
+          <a href="tel:+8801331775590">Phone <span>+880 1331-775590</span></a>
+          <a href="https://www.linkedin.com/in/sakibul-islam-roni-37b224241/" target="_blank">LinkedIn <span>roni</span></a>
+          <a href="https://facebook.com/sakibronii/" target="_blank">Facebook <span>@sakibronii</span></a>
+          <a href="https://github.com/sroni8" target="_blank">GitHub <span>@sroni8</span></a>
+        </div>
+
+        <!-- Right Column: Direct Message Form (Compact & Adjusted Padding) -->
+        <div data-aos="fade-left">
+          <form action="https://formspree.io/f/xjykbrbv" method="POST" style="background: var(--panel); border: 1px solid var(--line); padding: 25px 30px; border-radius: 4px; width: 100%;">
+            <h3 style="font-family: var(--serif); font-size: 1.15rem; margin-bottom: 16px; color: var(--ink);">Send a Direct Message</h3>
+            
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; font-size: 0.74rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px;">YOUR NAME</label>
+              <input type="text" name="name" required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); border-radius: 2px; font-family: var(--sans);">
+            </div>
+
+            <div style="margin-bottom: 12px;">
+              <label style="display: block; font-size: 0.74rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px;">YOUR EMAIL</label>
+              <input type="email" name="email" required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); border-radius: 2px; font-family: var(--sans);">
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <label style="display: block; font-size: 0.74rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px;">MESSAGE</label>
+              <textarea name="message" rows="3" required style="width: 100%; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); color: var(--ink); border-radius: 2px; font-family: var(--sans); resize: none;"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; cursor: pointer; border: none;">Send Message</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Bottom Full-Width Status & Appreciation Card -->
+      <div class="contact-card" style="width: 100%; padding: 30px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px;" data-aos="fade-up">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <label style="display: block; font-size: 0.76rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px;">CURRENT STATUS</label>
+            <p style="color: var(--ink); font-size: 0.96rem;">Available For New Projects</p>
+          </div>
+          
+          <div style="text-align: right;">
+            <label style="display: block; font-size: 0.76rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px;">RESPONSE TIME</label>
+            <p style="color: var(--ink); font-size: 0.96rem;">Reply Within 24 Hours</p>
+          </div>
+        </div>
+
+        <div style="width: 100%; border-top: 1px solid var(--line); margin-top: 20px; padding-top: 20px; text-align: center;">
+          <label style="display: block; font-size: 0.76rem; color: var(--gold-soft); letter-spacing: 0.03em; margin-bottom: 4px; text-align: center;"></label>
+          <p style="color: var(--gold); font-family: var(--serif); font-style: italic; font-size: 1.15rem; text-align: center; width: 100%;">Thank you for visiting my portfolio.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+    <span>© 2026 - S Islam Roni. All rights reserved.</span>
+    <span style="display:flex; gap:22px;">
+      <a href="projects.html" style="color:var(--ink-dim);">Projects</a>
+      <a href="blog.html" style="color:var(--ink-dim);">Blog</a>
+      <a href="tools.html" style="color:var(--ink-dim);">Tools</a>
+    </span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 400,
+    once: true      
+  });
+</script>
+</body>
+</html>
+<!--
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 400,
+    once: true      
+  });
+</script>
+</body>
+</html>-->

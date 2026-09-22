@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Albums — S Islam Roni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:        #0E1013;
+    --bg-alt:    #15181C;
+    --panel:     #1B1F24;
+    --line:      #2A2F35;
+    --ink:       #EDEAE2;
+    --ink-dim:   #9BA0A6;
+    --gold:      #C9A227;
+    --gold-soft: #8D7A3E;
+    --serif: 'Fraunces', serif;
+    --sans:  'Manrope', sans-serif;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center;
+    padding:80px 20px 60px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  .back{
+    position:fixed; top:24px; left:28px;
+    font-size:0.86rem; color:var(--ink-dim);
+    border:1px solid var(--line);
+    padding:9px 18px; border-radius:20px;
+    transition:border-color .25s ease, color .25s ease;
+    z-index:20;
+    background:var(--bg);
+  }
+  .back:hover{ border-color:var(--gold-soft); color:var(--gold); }
+
+  .kicker{
+    color:var(--gold);
+    font-size:0.86rem;
+    letter-spacing:0.03em;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .kicker::before{ content:""; width:34px; height:1px; background:var(--gold-soft); }
+
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(2rem, 4.4vw, 3.1rem);
+    text-align:center;
+    max-width:640px;
+    margin-bottom:14px;
+  }
+  h1 em{ font-style:italic; font-weight:300; color:var(--gold); }
+
+  .subtitle{
+    color:var(--ink-dim);
+    text-align:center;
+    max-width:500px;
+    margin-bottom:50px;
+    font-size:1rem;
+  }
+
+  /* ---------- Album Folders Grid ---------- */
+  .albums-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+    max-width:1100px;
+    width:100%;
+  }
+  .album-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px;
+    cursor:pointer;
+    transition:transform .3s ease, border-color .3s ease;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .album-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--gold-soft);
+  }
+  .folder-icon{
+    width:42px; height:42px;
+    border:1px solid var(--gold-soft);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold);
+    font-size:1.2rem;
+    background:var(--bg-alt);
+  }
+  .album-card h3{
+    font-family:var(--serif);
+    font-size:1.25rem;
+    font-weight:600;
+  }
+  .album-card p{
+    color:var(--ink-dim);
+    font-size:0.88rem;
+  }
+  .album-meta{
+    font-size:0.78rem;
+    color:var(--gold);
+    font-weight:600;
+    margin-top:auto;
+  }
+
+  /* ---------- Full Album Overlay ---------- */
+  .album-overlay{
+    position:fixed; inset:0;
+    background:rgba(10,11,13,0.97);
+    z-index:100;
+    opacity:0; pointer-events:none;
+    transition:opacity .35s ease;
+    overflow-y:auto;
+    padding:90px 24px 60px;
+  }
+  .album-overlay.active{ opacity:1; pointer-events:auto; }
+
+  .overlay-close{
+    position:fixed; top:24px; right:28px;
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:1.2rem;
+    cursor:pointer;
+    z-index:110;
+    transition:border-color .25s ease, color .25s ease;
+  }
+  .overlay-close:hover{ border-color:var(--gold-soft); color:var(--gold); }
+
+  .overlay-head{
+    text-align:center;
+    max-width:600px;
+    margin:0 auto 40px;
+  }
+  .overlay-head h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.8rem;
+    margin-bottom:8px;
+  }
+  .overlay-head p{ color:var(--ink-dim); font-size:0.94rem; }
+
+  .photos-grid{
+    max-width:1100px;
+    margin:0 auto;
+    columns:3 250px;
+    column-gap:16px;
+  }
+  .photo-item{
+    break-inside:avoid;
+    margin-bottom:16px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    background:var(--panel);
+    cursor:pointer;
+    position:relative;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .photo-item:hover{ transform:translateY(-3px); border-color:var(--gold-soft); }
+  .photo-item img{ width:100%; display:block; aspect-ratio:4/3; object-fit:cover; }
+  .photo-caption{
+    padding:10px 12px;
+    font-size:0.82rem;
+    color:var(--ink);
+    background:var(--bg-alt);
+    border-top:1px solid var(--line);
+    text-align:center;
+    font-weight:500;
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(6,7,8,0.98);
+    z-index:200;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+  }
+  .lightbox.active{ display:flex; }
+  .lb-frame{
+    max-width:900px; width:100%;
+    aspect-ratio:16/10;
+    background:var(--panel);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+    border-radius:4px;
+  }
+  .lb-frame img{ width:100%; height:100%; object-fit:contain; }
+  .lb-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:16px 20px;
+    font-size:0.88rem;
+    color:var(--ink);
+    background:linear-gradient(0deg, rgba(10,11,13,0.9), transparent);
+    text-align:center;
+  }
+  .lb-close, .lb-prev, .lb-next{
+    position:fixed;
+    width:46px; height:46px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:1.2rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .25s ease, color .25s ease;
+    z-index:210;
+  }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover{ border-color:var(--gold-soft); color:var(--gold); }
+  .lb-close{ top:24px; right:28px; }
+  .lb-prev{ top:50%; left:24px; transform:translateY(-50%); }
+  .lb-next{ top:50%; right:24px; transform:translateY(-50%); }
+
+  @media (max-width:600px){
+    .photos-grid{ columns:2 140px; }
+    .lb-prev{ left:10px; } .lb-next{ right:10px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back" href="portfolio.html">← Back to Portfolio</a>
+
+<h1>Travel <em>Albums.</em></h1>
+<p class="subtitle">Every journey tells a unique story, and these snapshots capture the memories I hold closest to my heart.</p>
+
+<!-- ALBUMS FOLDERS LIST -->
+<div class="albums-grid" id="albumsGrid"></div>
+
+<!-- ================= ALBUM CONTENT OVERLAY ================= -->
+<div class="album-overlay" id="albumOverlay">
+  <button class="overlay-close" id="overlayClose">✕</button>
+  <div class="overlay-head">
+    <h2 id="albumTitle">Album Name</h2>
+    <p id="albumDesc">Album description goes here</p>
+  </div>
+  <div class="photos-grid" id="photosGrid"></div>
+</div>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-prev" id="lbPrev">‹</button>
+  <div class="lb-frame">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+  <button class="lb-next" id="lbNext">›</button>
+</div>
+
+<script>
+  /* মোট ৬টি অ্যালবাম ফোল্ডার (প্রতিটিতে সর্বোচ্চ ৩০টি ছবি রাখা যাবে) */
+  const travelAlbums = [
+    {
+      id: "coxsbazar",
+      title: "Cox's Bazar Sea Beach",
+      desc: "Ocean breeze, golden sand, and mesmerizing sunset views.",
+      photos: [
+        { src: "images/cox1.jpg", caption: "Sunset at Sugandha Beach" },
+        { src: "images/cox2.jpg", caption: "Morning waves" }
+      ]
+    },
+    {
+      id: "sylhet",
+      title: "Sylhet Tea Gardens & Hills",
+      desc: "Lush green tea estates and peaceful natural water streams.",
+      photos: [
+        { src: "images/sylhet1.jpg", caption: "Jaflong Zero Point" },
+        { src: "images/sylhet2.jpg", caption: "Ratargul Swamp Forest" }
+      ]
+    },
+    {
+      id: "kuakata",
+      title: "Kuakata Sea Beach",
+      desc: "The daughter of the sea where sunrise and sunset both are visible.",
+      photos: [
+        { src: "images/kuakata1.jpg", caption: "Kuakata Beach View" }
+      ]
+    },
+    {
+      id: "sajek",
+      title: "Sajek Valley Clouds",
+      desc: "Kingdom of clouds surrounded by lush green hills and valleys.",
+      photos: [
+        { src: "images/sajek1.jpg", caption: "Morning view from Ruilui Para" }
+      ]
+    },
+    {
+      id: "chittagong",
+      title: "Chittagong Hills & Lakes",
+      desc: "Breathtaking landscapes, lakes, and adventurous mountain trails.",
+      photos: [
+        { src: "images/ctg1.jpg", caption: "Foy's Lake scenic view" }
+      ]
+    },
+    {
+      id: "naogaon",
+      title: "Naogaon Heritage & History",
+      desc: "Historical landmarks, ancient architecture, and serene countryside.",
+      photos: [
+        { src: "images/naogaon1.jpg", caption: "Paharpur Buddhist Vihara" }
+      ]
+    }
+  ];
+
+  const albumsGrid = document.getElementById('albumsGrid');
+  const albumOverlay = document.getElementById('albumOverlay');
+  const albumTitle = document.getElementById('albumTitle');
+  const albumDesc = document.getElementById('albumDesc');
+  const photosGrid = document.getElementById('photosGrid');
+
+  let currentAlbumPhotos = [];
+  let currentPhotoIndex = 0;
+
+  // Render Album Folders
+  travelAlbums.forEach((album) => {
+    const card = document.createElement('div');
+    card.className = 'album-card';
+    card.innerHTML = `
+      <div class="folder-icon">📁</div>
+      <h3>${album.title}</h3>
+      <p>${album.desc}</p>
+      <div class="album-meta">${album.photos.length} Photos</div>
+    `;
+    card.addEventListener('click', () => openAlbum(album));
+    albumsGrid.appendChild(card);
+  });
+
+  function openAlbum(album){
+    currentAlbumPhotos = album.photos;
+    albumTitle.textContent = album.title;
+    albumDesc.textContent = album.desc;
+    photosGrid.innerHTML = '';
+
+    album.photos.forEach((photo, idx) => {
+      const item = document.createElement('div');
+      item.className = 'photo-item';
+      item.innerHTML = `
+        <img src="${photo.src}" alt="${photo.caption}">
+        <div class="photo-caption">${photo.caption}</div>
+      `;
+      item.addEventListener('click', () => openLightbox(idx));
+      photosGrid.appendChild(item);
+    });
+
+    albumOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAlbum(){
+    albumOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('overlayClose').addEventListener('click', closeAlbum);
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+
+  function openLightbox(index){
+    currentPhotoIndex = index;
+    renderLightbox();
+    lightbox.classList.add('active');
+  }
+
+  function renderLightbox(){
+    const photo = currentAlbumPhotos[currentPhotoIndex];
+    lbImg.src = photo.src;
+    lbCap.textContent = photo.caption;
+  }
+
+  document.getElementById('lbClose').additionalEventListener = ('click', () => lightbox.classList.remove('active'));
+  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('active'));
+  document.getElementById('lbPrev').addEventListener('click', () => {
+    currentPhotoIndex = (currentPhotoIndex - 1 + currentAlbumPhotos.length) % currentAlbumPhotos.length;
+    renderLightbox();
+  });
+  document.getElementById('lbNext').addEventListener('click', () => {
+    currentPhotoIndex = (currentPhotoIndex + 1) % currentAlbumPhotos.length;
+    renderLightbox();
+  });
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('active')) return;
+    if(e.key === 'Escape') lightbox.classList.remove('active');
+    if(e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+    if(e.key === 'ArrowRight') document.getElementById('lbNext').click();
+  });
+</script>
+
+</body>
+</html>

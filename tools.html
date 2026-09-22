@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — S Islam Roni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --bg:        #0E1013;
+    --bg-alt:    #15181C;
+    --panel:     #1B1F24;
+    --line:      #2A2F35;
+    --ink:       #EDEAE2;
+    --ink-dim:   #9BA0A6;
+    --gold:      #C9A227;
+    --gold-soft: #8D7A3E;
+    --sans:  'Manrope', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 40px; }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,16,19,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:78px; }
+  .brand{ font-weight:700; font-size:1.25rem; }
+  .brand span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:30px; }
+  .nav-links a{ font-size:0.9rem; color:var(--ink-dim); font-weight:500; transition:color .2s; }
+  .nav-links a:hover, .nav-links a.active{ color:var(--gold); }
+  .nav-cta{
+    font-size:0.9rem; color:var(--gold); border:1px solid var(--gold-soft);
+    padding:8px 18px; border-radius:2px; font-weight:600;
+    transition:background .25s ease, color .25s ease;
+  }
+  .nav-cta:hover{ background:var(--gold); color:#101215; }
+
+  .page-hero{ padding:80px 0 40px; }
+  .kicker{
+    display:flex; align-items:center; gap:12px;
+    color:var(--gold); font-size:0.9rem; font-weight:600;
+    letter-spacing:0.04em; margin-bottom:16px; text-transform:uppercase;
+  }
+  .kicker::before{ content:""; width:34px; height:1px; background:var(--gold-soft); }
+  .page-hero h1{ font-size:clamp(2.4rem, 4vw, 3.5rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:16px; }
+  .page-hero h1 span{ color:var(--gold); }
+  .lede{ color:var(--ink-dim); max-width:600px; font-size:1.05rem; }
+
+  .tools-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:30px; }
+  .tool-card{
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:8px;
+    padding:32px; display:flex; flex-direction:column; gap:16px;
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .tool-card:hover{ border-color:var(--gold-soft); transform:translateY(-4px); }
+  .tool-icon{
+    width:48px; height:48px; border:1px solid var(--gold-soft); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.3rem; background:var(--panel);
+  }
+  .tool-card h3{ font-size:1.2rem; font-weight:700; }
+  .tool-card p{ color:var(--ink-dim); font-size:0.92rem; flex:1; }
+  .tag-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .tag{
+    font-size:0.75rem; color:var(--gold); background:var(--panel);
+    border:1px solid var(--line); padding:4px 10px; border-radius:4px; font-weight:600;
+  }
+  .tool-links{ display:flex; gap:16px; margin-top:4px; }
+  .tool-links a{ font-size:0.86rem; color:var(--gold); font-weight:600; }
+  .tool-links a:hover{ text-decoration:underline; }
+
+  footer{ border-top:1px solid var(--line); padding:32px 0; font-size:0.85rem; color:var(--ink-dim); margin-top:80px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; }
+
+  @media (max-width:860px){ .tools-grid{ grid-template-columns:1fr; } .nav-links{ display:none; } .wrap{ padding:0 20px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="portfolio.html">S Islam Roni<span>.tools</span></a>
+    <div class="nav-links">
+      <a href="portfolio.html#about">About</a>
+      <a href="projects.html">Work</a>
+      <a href="blog.html">Blog</a>
+      <a href="tools.html" class="active">Tools</a>
+      <a href="portfolio.html#contact">Contact</a>
+    </div>
+    <a href="portfolio.html#contact" class="nav-cta">Hire Me</a>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero" style="border-top:none;">
+    <div class="wrap" data-aos="fade-up">
+      <h1>Tools I've <span>built &amp; shared.</span></h1>
+      <p class="lede">
+        Open-source packages, compiler utilities, and automation scripts crafted to solve engineering friction and accelerate development workflows.
+      </p>
+    </div>
+  </section>
+
+  <section style="border-top:none; padding-bottom: 80px;">
+    <div class="wrap">
+      <div class="tools-grid">
+
+        <!-- Tool 1: Laravel ERP Boilerplate -->
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="tool-icon">⚡</div>
+          <h3>Laravel ERP Module Scaffold</h3>
+          <p>A modular backend boilerplate optimized for manufacturing resource planning, inventory tracking, and automated batch processing systems.</p>
+          <div class="tag-row">
+            <span class="tag">PHP</span>
+            <span class="tag">Laravel</span>
+            <span class="tag">MySQL</span>
+          </div>
+          <div class="tool-links">
+            <a href="https://github.com/sroni8" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- Tool 2: Custom Lexical Analyzer (Flex/Bison) -->
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="tool-icon">⚙</div>
+          <h3>Lexical Scope Analyzer</h3>
+          <p>A lightweight compiler utility built using Flex and Bison to parse syntax tokens and generate intermediate code structures efficiently.</p>
+          <div class="tag-row">
+            <span class="tag">C</span>
+            <span class="tag">Flex &amp; Bison</span>
+            <span class="tag">Compiler</span>
+          </div>
+          <div class="tool-links">
+            <a href="https://github.com/sroni8" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- Tool 3: Python Data Pipeline & Churn Predictor -->
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="tool-icon">📊</div>
+          <h3>ML Customer Churn Pipeline</h3>
+          <p>An end-to-end Python automation script utilizing Scikit-Learn and Pandas for data preprocessing, sentiment analysis, and predictive metrics.</p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Scikit-Learn</span>
+            <span class="tag">Pandas</span>
+          </div>
+          <div class="tool-links">
+            <a href="https://github.com/sroni8" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- Tool 4: Flutter Cross-Platform UI Kit -->
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="400">
+          <div class="tool-icon">📱</div>
+          <h3>Flutter Responsive UI Starter</h3>
+          <p>A clean cross-platform component kit designed for rapid mobile application development with smooth gesture navigation and state management.</p>
+          <div class="tag-row">
+            <span class="tag">Flutter</span>
+            <span class="tag">Dart</span>
+            <span class="tag">Mobile UI</span>
+          </div>
+          <div class="tool-links">
+            <a href="https://github.com/sroni8" target="_blank">GitHub →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 S Islam Roni. All rights reserved.</span>
+    <span><a href="portfolio.html">← Back to Home</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
