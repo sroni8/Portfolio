@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>S islam Roni — Portfolio</title>
+<meta name="theme-color" content="#0E1013">
+<script>
+  /* Apply saved / system theme BEFORE first paint (no flash) */
+  (function(){
+    var t = null;
+    try { t = localStorage.getItem('theme'); } catch(e){}
+    if (t !== 'light' && t !== 'dark') {
+      t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -17,13 +29,39 @@
     --ink-dim:   #9BA0A6;
     --gold:      #C9A227;
     --gold-soft: #8D7A3E;
+    --header-bg: rgba(14,16,19,0.86);
+    --on-gold:   #111316;
+    --card-bg:   rgba(255,255,255,0.03);
+    --card-line: rgba(255,255,255,0.08);
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    --gold-bg:   rgba(212,175,55,0.08);
+    color-scheme: dark;
     --serif: 'Fraunces', serif;
     --sans:  'Manrope', sans-serif;
   }
 
+  /* ---------- Light theme ---------- */
+  :root[data-theme="light"]{
+    --bg:        #F6F3EC;
+    --bg-alt:    #EDE9DF;
+    --panel:     #FFFFFF;
+    --line:      #DCD6C7;
+    --ink:       #1B1D21;
+    --ink-dim:   #5A5F66;
+    --gold:      #9A7500;
+    --gold-soft: #7A6520;
+    --header-bg: rgba(246,243,236,0.88);
+    --on-gold:   #FFFFFF;
+    --card-bg:   #FFFFFF;
+    --card-line: #DCD6C7;
+    --card-shadow: 0 10px 30px rgba(60,50,20,0.08);
+    --gold-bg:   rgba(154,117,0,0.10);
+    color-scheme: light;
+  }
+
   *{ margin:0; padding:0; box-sizing:border-box; }
 
-  html{ scroll-behavior:smooth; }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
 
   body{
     background:var(--bg);
@@ -31,6 +69,8 @@
     font-family:var(--sans);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:clip;
+    transition:background .3s ease, color .3s ease;
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -45,7 +85,7 @@
   /* ---------- Nav ---------- */
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(14,16,19,0.86);
+    background:var(--header-bg);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -75,7 +115,7 @@
     color:var(--gold);
     transition:background .25s ease, color .25s ease;
   }
-  .nav-cta:hover{ background:var(--gold); color:#101215; }
+  .nav-cta:hover{ background:var(--gold); color:var(--on-gold); }
   .menu-btn{ display:none; background:none; border:0; color:var(--ink); font-size:1.6rem; cursor:pointer; }
 
   /* ---------- Hero ---------- */
@@ -91,6 +131,7 @@
       radial-gradient(560px 380px at 82% 10%, rgba(201,162,39,0.10), transparent 70%);
     pointer-events:none;
   }
+  .hero-grid > *{ min-width:0; }
   .hero-grid{
     display:grid;
     grid-template-columns:1.1fr 0.9fr;
@@ -133,7 +174,7 @@
   }
   .btn-primary{
     background:var(--gold);
-    color:#111316;
+    color:var(--on-gold);
     padding:14px 30px;
     font-weight:700;
     font-size:0.92rem;
@@ -528,11 +569,61 @@
   .travel-fan:hover .fan-card:nth-child(3){ transform:rotate(7deg) translateX(38px) translateY(-8px); }
   .travel-fan:hover .fan-card:nth-child(4){ transform:rotate(16deg) translateX(96px) translateY(-4px); }
 
+  /* ---------- Nav extras: theme toggle + mobile menu ---------- */
+  .nav-right{ display:flex; align-items:center; gap:12px; }
+  .theme-toggle{
+    width:40px; height:40px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:transparent;
+    border:1px solid var(--line);
+    border-radius:50%;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color .25s ease, color .25s ease, background .25s ease;
+  }
+  .theme-toggle:hover{ border-color:var(--gold-soft); color:var(--gold); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  :root[data-theme="dark"]  .icon-moon{ display:none; }
+  :root[data-theme="light"] .icon-sun { display:none; }
+
+  /* ---------- Back to top ---------- */
+  .back-to-top{
+    position:fixed;
+    right:20px;
+    bottom:calc(20px + env(safe-area-inset-bottom, 0px));
+    width:46px; height:46px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--gold);
+    color:var(--on-gold);
+    border:0; border-radius:50%;
+    font-size:1.2rem; font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,0.45);
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .3s ease, transform .3s ease, visibility .3s ease;
+    z-index:60;
+  }
+  .back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+  .back-to-top:hover{ transform:translateY(-3px); }
+  .footer-top{ color:var(--gold) !important; cursor:pointer; }
+
   /* ---------- Responsive ---------- */
   @media (max-width:860px){
     .wrap{ padding:0 22px; }
-    .nav-links{ display:none; }
-    .menu-btn{ display:block; }
+    nav.wrap{ height:66px; }
+    .nav-links{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--bg);
+      border-bottom:1px solid var(--line);
+      padding:8px 22px 16px;
+      box-shadow:0 18px 30px -18px rgba(0,0,0,0.35);
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ padding:14px 0; border-bottom:1px solid var(--line); font-size:1rem; }
+    .nav-links a:last-child{ border-bottom:0; }
+    .menu-btn{ display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; }
     .hero{ padding:64px 0 72px; }
     .hero-grid{ grid-template-columns:1fr; gap:44px; }
     .about-grid{ grid-template-columns:1fr; }
@@ -548,15 +639,54 @@
     .t-item::before{ left:-26px; }
     .travel-wrap{ grid-template-columns:1fr; }
     .travel-fan{ margin-top:20px; }
+
+    /* sections */
+    .section-head{ flex-direction:column; align-items:flex-start; gap:14px; margin-bottom:36px; }
+    .section-head p{ max-width:100%; }
+    .hero-photo{ max-width:360px; }
+    .hero-stats{ gap:24px !important; margin-top:0; }
+    .hero-actions{ margin-top:30px; }
+
+    /* experience */
+    .exp-grid{ grid-template-columns:1fr !important; gap:20px !important; }
+    .exp-wide{ grid-column:auto !important; }
+    .exp-grid > div{ padding:24px !important; }
+
+    /* education */
+    .edu-list{ gap:22px !important; }
+    .edu-card{ width:100% !important; align-self:stretch !important; padding:22px !important; }
+    .edu-head-title{ font-size:30px !important; }
+
+    /* writing */
+    .writing-grid{ grid-template-columns:1fr !important; }
+    .skill-block{ padding:28px 22px; }
+
+    /* contact */
+    .contact-two{ grid-template-columns:1fr !important; gap:32px !important; }
+    .contact-list a{ flex-wrap:wrap; gap:4px 12px; }
+    .contact-list a span{ overflow-wrap:anywhere; }
+    .contact-card [style*="text-align: right"]{ text-align:left !important; }
+    input, textarea{ font-size:16px !important; }
+
+    /* footer */
+    footer .wrap{ flex-direction:column; text-align:center; }
+  }
+
+  @media (max-width:560px){
+    .work-grid{ grid-template-columns:1fr; }
+    .nav-cta{ display:none; }
+    .hero-actions a{ flex:1 1 100%; text-align:center; }
+    .travel-fan{ transform:scale(.8); height:200px; margin-top:0; }
+    .back-to-top{ right:14px; width:44px; height:44px; }
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <header>
   <nav class="wrap">
     <div class="brand">S islam Roni<span></span></div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="blog.html">Blog</a>
@@ -564,7 +694,19 @@
       <a href="tools.html">Tools</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Hire Me</a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+      <a href="#contact" class="nav-cta">Hire Me</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
   </nav>
 </header>
 
@@ -595,7 +737,7 @@
 
           <!-- Social Links Row -->
           <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-            <span style="font-size: 0.82rem; color: var(soft); letter-spacing: 0.04em; font-weight: 600; text-transform: uppercase; margin-right: 4px;"<b><h2>Connect:</b></h2></span>
+            <span style="font-size: 0.82rem; color: var(--ink-dim); letter-spacing: 0.04em; font-weight: 600; text-transform: uppercase; margin-right: 4px;">Connect:</span>
             
             <!-- Facebook -->
             <a href="https://facebook.com/sakibronii" target="_blank" style="background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 8px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--gold)'; this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--line)'; this.style.color='var(--ink)';">
@@ -624,7 +766,7 @@
   </section>
 
   <!-- ================= ABOUT ================= -->
-  <section id="about" style="padding-top: 50px; data-aos="fade-up">
+  <section id="about" style="padding-top: 50px;" data-aos="fade-up">
     <div class="wrap">
       <div class="section-head">
         <div data-aos="fade-right">
@@ -666,7 +808,7 @@
   </section>
 
   <!-- ================= SKILLS ================= -->
-  <section id="skills" style="padding-top: 50px; style="padding-bottom: 30px; data-aos="fade-up">
+  <section id="skills" style="padding-top: 50px;" data-aos="fade-up">
     <div class="wrap">
       <div class="section-head">
         <div data-aos="fade-right">
@@ -746,35 +888,35 @@
         <p style="margin-top:16px;" data-aos="fade-left">Building scalable software, managing enterprise solutions, and leading technical teams to deliver real-world impact.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="100">
-          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2026 — Present</span>
-          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Founder & Software Engineer</h3>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">ForceTech49, Dhaka</p>
-          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Leading end-to-end software development, custom ERP solutions, and AI-driven web applications.</p>
-          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+      <div class="exp-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        <div style="background: var(--card-bg); border: 1px solid var(--card-line); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="100">
+          <span style="color: var(--gold); font-size: 14px; font-weight: 600;">2026 — Present</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: var(--ink);">Founder & Software Engineer</h3>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 15px;">ForceTech49, Dhaka</p>
+          <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Leading end-to-end software development, custom ERP solutions, and AI-driven web applications.</p>
+          <ul style="color: var(--ink-dim); font-size: 14px; padding-left: 18px; line-height: 1.6;">
             <li>Architecting system designs and managing full-stack product lifecycles from concept to deployment.</li>
             <li>Overseeing technical strategies and delivering scalable solutions for diverse business needs.</li>
           </ul>
         </div>
 
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="200">
-          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2025 — Present</span>
-          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Owner & CEO & Model</h3>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">The Reveal (Online Fashion Company), Dhaka</p>
-          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Directing overall business strategy, brand growth, and digital operations for an e-commerce fashion platform.</p>
-          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+        <div style="background: var(--card-bg); border: 1px solid var(--card-line); padding: 35px; border-radius: 12px;" data-aos="fade-up" data-aos-delay="200">
+          <span style="color: var(--gold); font-size: 14px; font-weight: 600;">2025 — Present</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: var(--ink);">Owner & CEO & Model</h3>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 15px;">The Reveal (Online Fashion Company), Dhaka</p>
+          <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Directing overall business strategy, brand growth, and digital operations for an e-commerce fashion platform.</p>
+          <ul style="color: var(--ink-dim); font-size: 14px; padding-left: 18px; line-height: 1.6;">
             <li>Managing customer acquisition, digital marketing campaigns, and brand positioning in the online market.</li>
             <li>Integrating modern e-commerce tools and workflow automation to streamline daily business processes.</li>
           </ul>
         </div>
 
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 35px; border-radius: 12px; grid-column: span 2;" data-aos="fade-up" data-aos-delay="300">
-          <span style="color: #d4af37; font-size: 14px; font-weight: 600;">2023 — 2024</span>
-          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: #fff;">Junior Developer / Intern</h3>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 15px;">People N Tech, Dhaka</p>
-          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Gained hands-on experience in modern web design and front-end development practices.</p>
-          <ul style="color: #aaa; font-size: 14px; padding-left: 18px; line-height: 1.6;">
+        <div style="background: var(--card-bg); border: 1px solid var(--card-line); padding: 35px; border-radius: 12px; grid-column: span 2;" class="exp-wide" data-aos="fade-up" data-aos-delay="300">
+          <span style="color: var(--gold); font-size: 14px; font-weight: 600;">2023 — 2024</span>
+          <h3 style="font-size: 22px; margin: 10px 0 5px 0; color: var(--ink);">Junior Developer / Intern</h3>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 15px;">People N Tech, Dhaka</p>
+          <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Gained hands-on experience in modern web design and front-end development practices.</p>
+          <ul style="color: var(--ink-dim); font-size: 14px; padding-left: 18px; line-height: 1.6;">
             <li>Collaborated on building responsive web interfaces and improving UI/UX performance.</li>
             <li>Applied core programming concepts to develop functional web components under senior supervision.</li>
           </ul>
@@ -788,40 +930,40 @@
     <div class="wrap">
       <div class="section-head" style="margin-bottom: 60px; text-align: center; display: block;" data-aos="fade-down">
         <span class="section-num">04</span>
-        <h2 style="font-size: 38px; color: #fff; letter-spacing: 1px;">Education & Credentials</h2>
-        <p style="margin-top:12px; color: #888;">Academic background, foundational studies, and professional training certificates.</p>
+        <h2 class="edu-head-title" style="font-size: 38px; color: var(--ink); letter-spacing: 1px;">Education & Credentials</h2>
+        <p style="margin-top:12px; color: var(--ink-dim);">Academic background, foundational studies, and professional training certificates.</p>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 40px;">
-        <div style="width: 58%; align-self: flex-start; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-left: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-right">
+      <div class="edu-list" style="display: flex; flex-direction: column; gap: 40px;">
+        <div class="edu-card" style="width: 58%; align-self: flex-start; background: var(--card-bg); border: 1px solid var(--card-line); border-left: 4px solid var(--gold); padding: 32px; border-radius: 12px; box-shadow: var(--card-shadow);" data-aos="fade-right">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-            <h3 style="font-size: 20px; color: #fff; margin: 0;">B.Sc. in Computer Science & Engineering</h3>
-            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2024 — 2028</span>
+            <h3 style="font-size: 20px; color: var(--ink); margin: 0;">B.Sc. in Computer Science & Engineering</h3>
+            <span style="color: var(--gold); font-size: 13px; font-weight: 600; background: var(--gold-bg); padding: 4px 10px; border-radius: 20px;">2024 — 2028</span>
           </div>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Daffodil International University, Dhaka</p>
-          <p style="color: #aaa; font-size: 14px; margin-bottom: 10px;">CGPA: Coming Soon</p>
-          <ul style="color: #999; font-size: 13.5px; padding-left: 18px; line-height: 1.6; margin: 0;">
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 10px; font-weight: 500;">Daffodil International University, Dhaka</p>
+          <p style="color: var(--ink-dim); font-size: 14px; margin-bottom: 10px;">CGPA: Coming Soon</p>
+          <ul style="color: var(--ink-dim); font-size: 13.5px; padding-left: 18px; line-height: 1.6; margin: 0;">
             <li>Focused on core computer science concepts, advanced algorithms, and full-stack software development.</li>
             <li>Actively engaged in technical research and practical software implementations, bridging academic theories with real-world solutions.</li>
           </ul>
         </div>
 
-        <div style="width: 58%; align-self: flex-end; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-right: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-left">
+        <div class="edu-card" style="width: 58%; align-self: flex-end; background: var(--card-bg); border: 1px solid var(--card-line); border-right: 4px solid var(--gold); padding: 32px; border-radius: 12px; box-shadow: var(--card-shadow);" data-aos="fade-left">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-            <h3 style="font-size: 20px; color: #fff; margin: 0;">Diploma in Engineering</h3>
-            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2019 — 2023</span>
+            <h3 style="font-size: 20px; color: var(--ink); margin: 0;">Diploma in Engineering</h3>
+            <span style="color: var(--gold); font-size: 13px; font-weight: 600; background: var(--gold-bg); padding: 4px 10px; border-radius: 20px;">2019 — 2023</span>
           </div>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Barishal Polytechnic Institute, Barishal</p>
-          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin: 0;">CGPA: 3.88/4.00 — Focused on foundational engineering, technical problem-solving, and practical applications.</p>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 10px; font-weight: 500;">Barishal Polytechnic Institute, Barishal</p>
+          <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin: 0;">CGPA: 3.88/4.00 — Focused on foundational engineering, technical problem-solving, and practical applications.</p>
         </div>
 
-        <div style="width: 58%; align-self: flex-start; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); border-left: 4px solid #d4af37; padding: 32px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" data-aos="fade-right">
+        <div class="edu-card" style="width: 58%; align-self: flex-start; background: var(--card-bg); border: 1px solid var(--card-line); border-left: 4px solid var(--gold); padding: 32px; border-radius: 12px; box-shadow: var(--card-shadow);" data-aos="fade-right">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-            <h3 style="font-size: 20px; color: #fff; margin: 0;">Flutter UI/UX Design Professional Training</h3>
-            <span style="color: #d4af37; font-size: 13px; font-weight: 600; background: rgba(212, 175, 55, 0.08); padding: 4px 10px; border-radius: 20px;">2022 — 2023</span>
+            <h3 style="font-size: 20px; color: var(--ink); margin: 0;">Flutter UI/UX Design Professional Training</h3>
+            <span style="color: var(--gold); font-size: 13px; font-weight: 600; background: var(--gold-bg); padding: 4px 10px; border-radius: 20px;">2022 — 2023</span>
           </div>
-          <p style="color: #d4af37; font-size: 14px; margin-bottom: 10px; font-weight: 500;">Sheikh Russel Mobile Games & Apps Development</p>
-          <p style="color: #aaa; font-size: 14px; line-height: 1.6; margin: 0;">Mobile Games & App Development - ICT Division Project</p>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 10px; font-weight: 500;">Sheikh Russel Mobile Games & Apps Development</p>
+          <p style="color: var(--ink-dim); font-size: 14px; line-height: 1.6; margin: 0;">Mobile Games & App Development - ICT Division Project</p>
         </div>
       </div>
     </div>
@@ -915,7 +1057,7 @@
         <p style="max-width: 100%; margin-top: 12px;" data-aos="fade-left">Sharing insights, engineering lessons, and technical documentation from building real-world software products.</p>
       </div>
 
-      <div class="skills-grid" style="grid-template-columns:repeat(3,1fr);" data-aos="fade-up" data-aos-delay="100">
+      <div class="skills-grid writing-grid" style="grid-template-columns:repeat(3,1fr);" data-aos="fade-up" data-aos-delay="100">
         <a class="skill-block" href="blog-post.html" data-aos="fade-up" data-aos-delay="100" style="text-decoration:none; transition:border-color .25s ease;">
           <span style="font-size:0.78rem; color:var(--gold);">Sep 2026 · 6 min read</span>
           <h4 style="margin-top:10px;">How I Structured a Scalable Backend</h4>
@@ -1125,7 +1267,7 @@
       </div>
 
       <!-- Main Layout: Left Links & Right Form Stacked -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-bottom: 25px;">
+      <div class="contact-two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-bottom: 25px;">
         
         <!-- Left Column: Contact Links -->
         <div class="contact-list" data-aos="fade-right">
@@ -1193,16 +1335,74 @@
       <a href="projects.html" style="color:var(--ink-dim);">Projects</a>
       <a href="blog.html" style="color:var(--ink-dim);">Blog</a>
       <a href="tools.html" style="color:var(--ink-dim);">Tools</a>
+      <a href="#top" class="footer-top" id="footerTop">Back to top ↑</a>
     </span>
   </div>
 </footer>
+
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">↑</button>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({
     duration: 400,
-    once: true      
+    once: true
   });
+</script>
+<script>
+  (function(){
+    var root = document.documentElement;
+
+    /* ---------- Theme toggle ---------- */
+    var toggle = document.getElementById('themeToggle');
+    var metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    function applyTheme(t, save){
+      root.setAttribute('data-theme', t);
+      if (metaTheme) metaTheme.setAttribute('content', t === 'light' ? '#F6F3EC' : '#0E1013');
+      toggle.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+      toggle.setAttribute('title',      t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+      if (save) { try { localStorage.setItem('theme', t); } catch(e){} }
+    }
+    applyTheme(root.getAttribute('data-theme') || 'dark', false);
+
+    toggle.addEventListener('click', function(){
+      applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light', true);
+    });
+
+    // follow the device setting until the visitor makes their own choice
+    if (window.matchMedia) {
+      var mq = matchMedia('(prefers-color-scheme: light)');
+      var onChange = function(e){
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch(err){}
+        if (!saved) applyTheme(e.matches ? 'light' : 'dark', false);
+      };
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+    }
+
+    /* ---------- Mobile menu ---------- */
+    var menuBtn  = document.getElementById('menuBtn');
+    var navLinks = document.getElementById('navLinks');
+    function setMenu(open){
+      navLinks.classList.toggle('open', open);
+      menuBtn.textContent = open ? '✕' : '☰';
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    menuBtn.addEventListener('click', function(){ setMenu(!navLinks.classList.contains('open')); });
+    navLinks.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+    window.addEventListener('resize', function(){ if (window.innerWidth > 860) setMenu(false); });
+
+    /* ---------- Back to top ---------- */
+    var btt = document.getElementById('backToTop');
+    function onScroll(){ btt.classList.toggle('show', window.scrollY > 400); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    function goTop(e){ if (e) e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    btt.addEventListener('click', goTop);
+    document.getElementById('footerTop').addEventListener('click', goTop);
+  })();
 </script>
 </body>
 </html>
